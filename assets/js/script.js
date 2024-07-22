@@ -88,3 +88,31 @@ document.addEventListener('DOMContentLoaded', function() {
     return false; // Prevent default form submission
   }
 });
+
+
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const name = document.querySelector('input[name="name"]').value;
+            const email = document.querySelector('input[name="email"]').value;
+            const subject = document.querySelector('input[name="subject"]').value;
+            const message = document.querySelector('textarea[name="message"]').value;
+
+            if (!name || !email || !subject || !message) {
+                alert('Please fill out all fields');
+                return;
+            }
+
+            // Save message details to local storage
+            const messageDetails = { name, email, subject, message };
+            localStorage.setItem('messageDetails', JSON.stringify(messageDetails));
+
+            // Show success message
+            const successMessage = document.getElementById('success-message');
+            successMessage.style.display = 'block';
+
+            // Redirect to the admin page after 3 seconds
+            setTimeout(() => {
+                window.location.href = 'index.html'; // Replace with your admin page URL
+            }, 3000);
+        });
